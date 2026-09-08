@@ -1,0 +1,291 @@
+<?php
+
+session_start();
+
+if (
+    !isset($_SESSION["user_id"]) ||
+    !isset($_SESSION["user_role"]) ||
+    $_SESSION["user_role"] !== "admin"
+) {
+    header("Location: ../index.php");
+    exit;
+}
+
+require_once "../config/database.php";
+
+$message = "";
+$messageType = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $admission_no = trim($_POST["admission_no"] ?? "");
+    $first_name = trim($_POST["first_name"] ?? "");
+    $last_name = trim($_POST["last_name"] ?? "");
+    $email = trim($_POST["email"] ?? "");
+    $phone = trim($_POST["phone"] ?? "");
+    $gender = $_POST["gender"] ?? "";
+    $date_of_birth = $_POST["date_of_birth"] ?? "";
+    $course = trim($_POST["course"] ?? "");
+    $semester = (int)($_POST["semester"] ?? 0);
+    $address = trim($_POST["address"] ?? "");
+
+    if (
+        $admission_no === "" ||
+        $first_name === "" ||
+        $last_name === "" ||
+        $course === "" ||
+        $semester <= 0
+    ) {
+        $message = "Please fill all required fields.";
+        $messageType = "danger";
+    } else {
+
+        $stmt = $conn->prepare("
+            INSERT INTO students
+            (
+                admission_no,
+                first_name,
+                last_name,
+                email,
+                phone,
+                gender,
+                date_of_birth,
+                course,
+                semester,
+                address
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+
+        $stmt->bind_param(
+            "ssssssssss",
+            $admission_no,
+            $first_name,
+            $last_name,
+            $email,
+            $phone,
+            $gender,
+            $date_of_birth,
+            $course,
+            $semester,
+            $address
+        );
+
+        if ($stmt->execute()) {
+            $message = "Student added successfully.";
+            $messageType = "success";
+        } else {
+            $message = "Could not add student. Admission number or email may already exist.";
+            $messageType = "danger";
+        }
+    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Student</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link rel="stylesheet" href="../assets/css/admin.css">
+
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <?php include "../includes/admin-sidebar.php"; ?>
+
+    <div class="main-area">
+
+        <?php include "../includes/admin-header.php"; ?>
+
+        <main class="dashboard-content">
+
+            <div class="page-heading">
+
+                <div>
+                    <h2>Add Student</h2>
+                    <p>Create a new student record.</p>
+                </div>
+
+                <a href="students.php" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Students
+                </a>
+
+            </div>
+
+            <?php if ($message !== ""): ?>
+
+                <div class="alert alert-<?php echo $messageType; ?>">
+                    <?php echo htmlspecialchars($message); ?>
+                </div>
+
+            <?php endif; ?>
+
+            <div class="dashboard-card">
+
+                <form method="POST">
+
+                    <div class="row g-4">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Admission Number *</label>
+                            <input
+                                type="text"
+                                name="admission_no"
+                                class="form-control"
+                                placeholder="e.g. CMS2026001"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                class="form-control"
+                                placeholder="student@college.com"
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">First Name *</label>
+                            <input
+                                type="text"
+                                name="first_name"
+                                class="form-control"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name *</label>
+                            <input
+                                type="text"
+                                name="last_name"
+                                class="form-control"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Phone</label>
+                            <input
+                                type="text"
+                                name="phone"
+                                class="form-control"
+                                placeholder="9876543210"
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Gender</label>
+
+                            <select name="gender" class="form-select">
+                                <option value="">Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth</label>
+                            <input
+                                type="date"
+                                name="date_of_birth"
+                                class="form-control"
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Course *</label>
+                            <input
+                                type="text"
+                                name="course"
+                                class="form-control"
+                                placeholder="e.g. BCA"
+                                required
+                            >
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Semester *</label>
+
+                            <select
+                                name="semester"
+                                class="form-select"
+                                required
+                            >
+                                <option value="">Select semester</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Address</label>
+
+                            <textarea
+                                name="address"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Enter student address"
+                            ></textarea>
+                        </div>
+
+                        <div class="col-12">
+
+                            <button
+                                type="submit"
+                                class="btn primary-action-btn"
+                            >
+                                <i class="bi bi-person-plus-fill"></i>
+                                Add Student
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<script src="../assets/js/admin.js"></script>
+
+</body>
+</html>

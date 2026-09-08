@@ -1,0 +1,672 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-wrapper {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(80, 90, 255, 0.14),
+            transparent 35%
+        ),
+        #f5f7fb;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(31, 38, 135, 0.12);
+}
+
+.login-banner {
+    min-height: 620px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111936,
+            #303b8f
+        );
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+}
+
+.banner-content {
+    padding: 60px;
+}
+
+.brand-icon {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 32px;
+
+    margin-bottom: 30px;
+}
+
+.banner-content h1 {
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.banner-content p {
+    color: #d8ddff;
+    font-size: 16px;
+    line-height: 1.8;
+
+    margin-bottom: 35px;
+}
+
+.feature-item {
+    margin-bottom: 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    color: #edf0ff;
+}
+
+.feature-item i {
+    color: #7fe6aa;
+}
+
+.login-form-section {
+    min-height: 620px;
+
+    display: flex;
+    align-items: center;
+}
+
+.login-form-box {
+    width: 100%;
+
+    padding: 60px;
+}
+
+.small-title {
+    color: #5c6cf2;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    font-size: 12px;
+}
+
+.login-form-box h2 {
+    font-size: 32px;
+
+    font-weight: 700;
+
+    color: #1c2340;
+
+    margin-top: 8px;
+}
+
+.form-label {
+    font-weight: 600;
+
+    color: #30374f;
+
+    margin-bottom: 8px;
+}
+
+.custom-input {
+    border: 1px solid #dde2ef;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+.custom-input .input-group-text {
+    background: #ffffff;
+
+    border: none;
+
+    color: #7a829c;
+}
+
+.custom-input .form-control {
+    border: none;
+
+    padding: 14px 10px;
+}
+
+.custom-input .form-control:focus {
+    box-shadow: none;
+}
+
+.password-toggle {
+    border: none;
+
+    background: #ffffff;
+
+    color: #7a829c;
+}
+
+.role-select {
+    border-radius: 12px;
+
+    padding: 14px;
+
+    border: 1px solid #dde2ef;
+}
+
+.role-select:focus {
+    box-shadow: none;
+
+    border-color: #5c6cf2;
+}
+
+.login-btn {
+    background:
+        linear-gradient(
+            135deg,
+            #5364ed,
+            #3543bb
+        );
+
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    color: white;
+}
+
+.login-btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #4657df,
+            #2937aa
+        );
+
+    color: white;
+}
+
+.footer-text {
+    color: #8b91a7;
+
+    font-size: 13px;
+}
+
+.footer-text span {
+    color: #aeb4c4;
+}
+
+@media (max-width: 991px) {
+
+    .login-banner {
+        min-height: auto;
+    }
+
+    .banner-content {
+        padding: 40px;
+    }
+
+    .banner-content h1 {
+        font-size: 32px;
+    }
+
+    .login-form-section {
+        min-height: auto;
+    }
+
+    .login-form-box {
+        padding: 40px;
+    }
+
+}
+
+@media (max-width: 576px) {
+
+    .login-wrapper {
+        padding: 20px 8px;
+    }
+
+    .login-card {
+        border-radius: 18px;
+    }
+
+    .banner-content {
+        padding: 30px;
+    }
+
+    .login-form-box {
+        padding: 30px 25px;
+    }
+
+    .banner-content h1 {
+        font-size: 28px;
+    }
+
+    .login-form-box h2 {
+        font-size: 26px;
+    }
+
+}
+
+/* =========================================
+   MODERN LOGIN INTERACTIONS
+========================================= */
+
+/* Login Card */
+.login-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 28px 70px rgba(31, 38, 135, 0.18);
+}
+
+
+/* Brand Icon Animation */
+.brand-icon {
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.brand-icon:hover {
+    transform: translateY(-4px) rotate(-5deg) scale(1.05);
+    background: rgba(255, 255, 255, 0.18);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Feature Items */
+.feature-item {
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.feature-item:hover {
+    transform: translateX(7px);
+    color: #ffffff;
+}
+
+
+/* Input Box Interaction */
+.custom-input {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.custom-input:focus-within {
+    border-color: #5c6cf2;
+
+    box-shadow:
+        0 0 0 4px rgba(92, 108, 242, 0.10);
+
+    transform: translateY(-1px);
+}
+
+
+/* Role Dropdown */
+.role-select {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.25s ease;
+}
+
+.role-select:focus {
+    border-color: #5c6cf2;
+
+    box-shadow:
+        0 0 0 4px rgba(92, 108, 242, 0.10);
+
+    transform: translateY(-1px);
+}
+
+
+/* Password Eye */
+.password-toggle {
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #5364ed;
+    background: #f4f6ff;
+}
+
+
+/* Login Button */
+.login-btn {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(83, 100, 237, 0.30);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Shine Animation */
+.login-btn::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.30),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.55s ease;
+}
+
+.login-btn:hover::before {
+    left: 130%;
+}
+
+/* =========================================
+   ANIMATED LOGIN BACKGROUND
+========================================= */
+
+.login-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.login-wrapper::before,
+.login-wrapper::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(70px);
+    opacity: 0.45;
+    pointer-events: none;
+    animation: floatGlow 9s ease-in-out infinite alternate;
+}
+
+.login-wrapper::before {
+    width: 280px;
+    height: 280px;
+    background: rgba(83, 100, 237, 0.22);
+    top: -70px;
+    left: -70px;
+}
+
+.login-wrapper::after {
+    width: 320px;
+    height: 320px;
+    background: rgba(123, 92, 255, 0.18);
+    right: -90px;
+    bottom: -90px;
+    animation-delay: 2s;
+}
+
+.login-card {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Banner Glow */
+.login-banner {
+    position: relative;
+    overflow: hidden;
+}
+
+.login-banner::before {
+    content: "";
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    background: rgba(108, 126, 255, 0.18);
+
+    top: -70px;
+    right: -80px;
+
+    filter: blur(10px);
+
+    animation: bannerGlow 7s ease-in-out infinite alternate;
+}
+
+.login-banner::after {
+    content: "";
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    bottom: -50px;
+    left: -40px;
+
+    animation: bannerGlow 8s ease-in-out infinite alternate-reverse;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Animations */
+@keyframes floatGlow {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(35px, 25px) scale(1.08);
+    }
+}
+
+@keyframes bannerGlow {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(25px, 20px);
+    }
+}
+
+/* =========================================
+   LOGIN LOAD ANIMATIONS
+========================================= */
+
+.login-card {
+    animation: loginCardEnter 0.75s ease both;
+}
+
+.banner-content {
+    animation: bannerContentEnter 0.8s ease 0.15s both;
+}
+
+.login-form-box {
+    animation: formEnter 0.8s ease 0.2s both;
+}
+
+
+/* Feature stagger */
+.feature-item {
+    opacity: 0;
+    animation: featureEnter 0.55s ease forwards;
+}
+
+.feature-item:nth-child(1) {
+    animation-delay: 0.45s;
+}
+
+.feature-item:nth-child(2) {
+    animation-delay: 0.60s;
+}
+
+.feature-item:nth-child(3) {
+    animation-delay: 0.75s;
+}
+
+
+/* Animation Keyframes */
+@keyframes loginCardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes bannerContentEnter {
+    from {
+        opacity: 0;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes formEnter {
+    from {
+        opacity: 0;
+        transform: translateX(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes featureEnter {
+    from {
+        opacity: 0;
+        transform: translateX(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+
+    .login-card,
+    .banner-content,
+    .login-form-box,
+    .feature-item,
+    .login-wrapper::before,
+    .login-wrapper::after,
+    .login-banner::before,
+    .login-banner::after {
+        animation: none !important;
+    }
+}
+
+/* =========================================
+   MICRO INTERACTIONS
+========================================= */
+
+.custom-input .input-group-text i {
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.custom-input:focus-within .input-group-text i {
+    color: #5364ed;
+    transform: scale(1.08);
+}
+
+.role-select:hover {
+    border-color: #c5cbea;
+}
+
+.login-btn i {
+    transition: transform 0.25s ease;
+}
+
+.login-btn:hover i {
+    transform: translateX(5px);
+}
+
+.form-label {
+    transition: color 0.2s ease;
+}
+
+.custom-input:focus-within ~ .form-label,
+.form-label:hover {
+    color: #5364ed;
+}

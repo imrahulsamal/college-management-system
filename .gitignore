@@ -1,0 +1,21 @@
+# Windows files
+Thumbs.db
+Desktop.ini
+
+# Editor settings
+.vscode/
+.idea/
+
+# Temporary files
+*.log
+*.tmp
+*.bak
+
+# Environment / secrets
+.env
+
+# Local database configuration
+config/database.php
+
+# Development / testing utility
+make-password.php
